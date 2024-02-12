@@ -5,7 +5,7 @@ namespace Pr{
   {
     static void Main(string[] args)
     {
-      Console.WriteLine("\nLab 2");
+      Console.WriteLine("\nLab 3");
       
       Console.WriteLine("Choose task: ");
       int s = Convert.ToInt32(Console.ReadLine());
@@ -13,8 +13,6 @@ namespace Pr{
   switch(s){
     case 1: { task1();  break;}
     case 2: { task2();  break;}
-    case 3: { task3();  break;}
-    case 4: { task4();  break;}
   }
       
     }
@@ -23,59 +21,21 @@ namespace Pr{
 static void task1()
 {
     Console.WriteLine("\nTask1");
-    Console.Write("N: ");
+    Console.Write("Numner of triangle: ");
     int n = Convert.ToInt32(Console.ReadLine());
 
-    int [] a=new int[n];
+    int [] a=new int[n*2];
     int s=0;
 
-    Console.Write("Input array: ");
+    Console.Write("Sides: ");
     for(int i = 0;i<a.Length;i++)
     {
       a[i]= Convert.ToInt32(Console.ReadLine());
     }
 
-    Console.Write("Start: ");
-    int st = Convert.ToInt32(Console.ReadLine());
-    Console.Write("End: ");
-    int end = Convert.ToInt32(Console.ReadLine());
+    ITriangle first = new ITriangle ();
+    first.side(a[0],a[1]);
 
-    for(int i=st; i<end;i++){
-        s+=a[i];
-    }
-    
-    Console.WriteLine("S: " + s);
-
-
-    Console.Write("Part2. N1: ");
-    int n1 = Convert.ToInt32(Console.ReadLine());
-    Console.Write("N2: ");
-    int n2 = Convert.ToInt32(Console.ReadLine());
-    int [,] a1=new int[n1,n2];
-    int s1=0;
-
-    Console.Write("Input array: ");
-    for(int i = 0;i<n1;i++)
-    for(int j = 0;j<n2;j++)
-    {
-      a1[i,j]= Convert.ToInt32(Console.ReadLine());
-    }
-
-    Console.Write("Start i: ");
-    int st1 = Convert.ToInt32(Console.ReadLine());
-    Console.Write("End i: ");
-    int end1 = Convert.ToInt32(Console.ReadLine());
-    Console.Write("Start j: ");
-    int st2 = Convert.ToInt32(Console.ReadLine());
-    Console.Write("End j: ");
-    int end2 = Convert.ToInt32(Console.ReadLine());
-
-    for(int i = st1;i<end1;i++)
-    for(int j = st2;j<end2;j++){
-        s1+=a1[i,j];
-    }
-    
-    Console.WriteLine("S1: " + s1);
 
 }
 static void task2()
@@ -117,113 +77,57 @@ static void task2()
       Console.Write("\nS: "+ s+ "\n");
      }
 }
-static void task3()
-{
-    Console.Write("N1: ");
-    int n1 = Convert.ToInt32(Console.ReadLine());
-    Console.Write("N2: ");
-    int n2 = Convert.ToInt32(Console.ReadLine());
-    int [,] a=new int[n1,n2];
-
-    Console.Write("Input array: ");
-    
-    for(int i = 0;i<n1;i++)
-    for(int j = 0;j<n2;j++)
-    {
-      a[i,j]= Convert.ToInt32(Console.ReadLine());
-    }
-    
-    // int [,] a={{1,2,3},{4,5,6},{7,8,9},{10,11,12}};
-    int t=0;
-    int k=0;
-
-    if((n1%2)==0){
-      
-      for(int i = 0;i<n1;i++){
-        for(int j = 0;j<n2;j++)
-        {
-          if(k==3){k=0; break;}
-          k+=1;
-          t=a[i,j];
-          a[i,j]=a[i+1,j];
-          a[i+1,j]=t;
-          Console.Write("\nA:"+ a[i,j]);
-          Console.Write("\nA+:"+ a[i+1,j]);
-       }
-      }
-    }
-
-   Console.Write("\n\nA: ");
-    for(int i = 0;i<n1;i++)
-    for(int j = 0;j<n2;j++){
-      if(k==3) {
-        k=0; 
-        Console.Write("\n   ");
-      }
-    Console.Write(a[i,j]+" ");
-    k+=1;
-    }
-
 }
-static void task4()
-{
-    Console.Write("N1: ");
-    int n1 = Convert.ToInt32(Console.ReadLine());
-    int [,] a=new int[n1,n1];
-    int [] r=new int[n1];
-
-    Console.Write("Input array: ");
-    
-    for(int i = 0;i<n1;i++)
-    for(int j = 0;j<n1;j++)
-    {
-      a[i,j]= Convert.ToInt32(Console.ReadLine());
-    }
-
-  for(int j = 0;j<n1;j++){
-    for(int i = 0;i<n1;i++)
-    {
-      if((a[i,j]%2)!=0){
-        r[j]=j;
-         Console.Write("\nR: "+i+"   A: "+a[i,j]);
-      }
-    }}
-    
-    Console.Write("\nR: ");
-    for(int i = 0;i<r.Length;i++){
-      Console.Write(r[i]+" ");
-    }
-}
-  }
 
 class ITriangle{
-  protected int a, b, c;
+  protected int a, b;
+  protected string c;
 
-  public side (int sa, int sb) {
+  public void side (int sa, int sb) {
       a=sa;
       b=sb;
   }
+
+  int [] sides(int sa, int sb){
+    int [] a = {sa,sb};
+    return a;   
+  }
+  int perimeter(int sa, int sb){
+    int p=sa+2*sb;
+    return p;   
+  }
+  double area (int sa, int sb, int p1){
+    int p=p1/2;
+    double s= Math.Sqrt(p*(p1-sa)*(p1-sb)*(p1-sb));
+    return s;   
+  }
+
+  bool correct (int sa, int sb){
+    if(sa==sb) return true; 
+    else return false;
+  }
+
+  public int[] sidegr{
+    get{
+      int [] k= {this.a,this.b};
+      return k;
+    }
+
+    set{
+      a=value[2];
+    }
+  }
+
+  public string colorgr{
+
+    get{
+      string s=this.c;
+      return s;
+    }
+    set{
+      c=value;
+    }
+  }
 }
 
-int [] sides(int sa, int sb){
- int [] a = {s1,sb};
- return a;   
-}
-int perimeter(int sa, int sb){
- int p=sa+2*sb;
- return p;   
-}
-int area (int sa, int sb, int p1){
-  int p=p1/2;
-  int s= Math.Sqrt(p*(p1-sa)*(p1-sb)*(p1-sb));
- return s;   
-}
-int area (int sa, int sb, int p1){
-  int p=p1/2;
-  int s= Math.Sqrt(p*(p1-sa)*(p1-sb)*(p1-sb));
- return s;   
-}
-bool correct (int sa, int sb){
-  if(sa==sb) return true; 
-  else return false
 }
