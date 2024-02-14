@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Pr{
   class Program
@@ -118,14 +119,18 @@ static void task2()
     ar.SetValue(n[2],9); //population 1
     ar.SetValue(n[3],10); //population 2
 */
+
      a.Add(new Region(s[0], n[0], s[2]));
      a.Add(new Region(s[1], n[1], s[3]));
      a.Add(new Town(s[0], n[0], s[4]));
      a.Add(new Town(s[1], n[1], s[5]));
      a.Add(new Metropolis(s[0], n[0], n[2]));
      a.Add(new Metropolis(s[1], n[1], n[3]));
-
-
+     
+    a.Sort(new Comp());
+    /*Region ar = new Region(s[0], n[0], s[2]);
+    ar.Show();*/
+    
     // BaseAI p = new Pl(b);
     //            b.start();
 
@@ -184,12 +189,12 @@ class ITriangle{
 }
 
 
-class Place {
+public class Place {
 
     public string loc;
     public int id;
 
-    public String Location() {
+    public string Location() {
         return loc;
     }
 
@@ -221,7 +226,7 @@ class Region : Place {
 
     public void Show() {
 
-        Console.Write(id+ " Place "+ loc+"Region " +size+"\n");
+        Console.Write(id+ " Place "+ loc+" Region " +size+"\n");
     }
 
 }
@@ -260,6 +265,33 @@ class Metropolis : Place {
     }
 
 }
+
+
+public class Comp: Comparer<Place>{
+
+  Comparer<Place> com = new Comparer<Place>(){
+    public override int Compare(Place i,Place j)
+    {
+    if (i.id > j.id) {
+                            return 1;
+                        } else if (i.id < j.id) {
+                            return -1;
+                        } else
+                            return 0;
+      }
+};
+
+  Comparer<Place> com1 = new Comparer<Place>() {
+                    public int Compare(Place i, Place j) {
+                        if (i.loc == j.loc) {
+                            return 0;
+                        } else
+                            return 1;
+
+                    }
+                };
+}
+
 
 /*
 abstract class BaseAI {
