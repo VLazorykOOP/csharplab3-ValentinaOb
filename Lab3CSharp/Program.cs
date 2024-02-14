@@ -24,18 +24,47 @@ static void task1()
     Console.WriteLine("\nTask1");
     Console.Write("Numner of triangle: ");
     int n = Convert.ToInt32(Console.ReadLine());
+    string c ="Blue";
 
-    int [] a=new int[n*2];
-    int s=0;
+    for(int f = 0;f<n;f++)
+    {Console.Write("\n  Triangle "+f+1);
+      int [] a=new int[2];
 
-    Console.Write("Sides: ");
+    Console.Write("\nSides: ");
     for(int i = 0;i<a.Length;i++)
     {
       a[i]= Convert.ToInt32(Console.ReadLine());
     }
+    Console.Write("Color: ");
+     c=Convert.ToString(Console.ReadLine());
 
     ITriangle first = new ITriangle ();
     first.side(a[0],a[1]);
+    first.col(c);
+    int p =first.perimeter(a[0],a[1]);
+    Console.Write("\nPerimeter: "+p);
+    double s =first.area(a[0],a[1],p);
+    Console.Write("\nS: "+s);
+    bool t =first.correct(a[0],a[1]);
+    Console.Write("\nCorrect: "+t);
+
+
+    Console.Write("\nChange sides: ");
+    int [] k=new int[2];
+    for(int i = 0;i<k.Length;i++)
+    {
+      k[i]= Convert.ToInt32(Console.ReadLine());
+    }
+    int [] b={k[0],k[1]};
+    first.sidegr=b;
+    b=first.sidegr;
+
+    Console.Write("\nSides: ");
+    for(int i = 0;i<b.Length;i++)
+    {
+      Console.Write(+b[i]+" ");
+    }
+    Console.Write("\nColor: "+first.colorgr);}
 
 
 }
@@ -112,21 +141,25 @@ class ITriangle{
       b=sb;
   }
 
-  int [] sides(int sa, int sb){
+  public void col (string c1) {
+      c=c1;
+  }
+
+  public int [] sides(int sa, int sb){
     int [] a = {sa,sb};
     return a;   
   }
-  int perimeter(int sa, int sb){
+  public int perimeter(int sa, int sb){
     int p=sa+2*sb;
     return p;   
   }
-  double area (int sa, int sb, int p1){
+  public double area (int sa, int sb, int p1){
     int p=p1/2;
     double s= Math.Sqrt(p*(p1-sa)*(p1-sb)*(p1-sb));
     return s;   
   }
 
-  bool correct (int sa, int sb){
+  public bool correct (int sa, int sb){
     if(sa==sb) return true; 
     else return false;
   }
@@ -138,18 +171,14 @@ class ITriangle{
     }
 
     set{
-      a=value[2];
+      a=value[0];
+      b=value[1];
     }
   }
 
   public string colorgr{
-
     get{
-      string s=this.c;
-      return s;
-    }
-    set{
-      c=value;
+      return c;
     }
   }
 }
