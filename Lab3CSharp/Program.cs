@@ -27,7 +27,7 @@ static void task1()
     string c ="Blue";
 
     for(int f = 0;f<n;f++)
-    {Console.Write("\n  Triangle "+f+1);
+    {Console.Write("\n  Triangle "+(f+1));
       int [] a=new int[2];
 
     Console.Write("\nSides: ");
