@@ -127,9 +127,6 @@ static void task2()
      a.Add(new Metropolis(s[0], n[0], n[2]));
      a.Add(new Metropolis(s[1], n[1], n[3]));
      
-   // var a = a.OrderBy(x => x.id).ThenBy(x => x.population).ToList();    
-
-    //a.sort((x,y)=>x.id.CompareTo(y.id));
     List<Place> sortpl = a.OrderBy(x=>x.id).ToList();
 
     Console.WriteLine("\nSort:");
@@ -211,8 +208,8 @@ public class Place {
         this.id = id;
     }
 
-    public void Show() {
-        Console.Write(id+"Place: "+ loc+"\n");
+    public virtual void Show() {
+        Console.Write(id+" Place: "+ loc+"\n");
     }
 }
 
@@ -228,7 +225,7 @@ class Region : Place {
         return size;
     }
 
-    public void Show() {
+    public override void Show() {
 
         Console.Write(id+ " Place "+ loc+" Region " +size+"\n");
     }
@@ -247,8 +244,8 @@ class Town : Place {
         return nation;
     }
 
-    public void Show() {
-      Console.Write(id+ " Place "+ loc+"Town " +nation+"\n");
+    public override void Show() {
+      Console.Write(id+ " Place "+ loc+" Town " +nation+"\n");
     }
 }
 
@@ -264,7 +261,7 @@ class Metropolis : Place {
         return population;
     }
 
-    public void Show() {
+    public override void Show() {
         Console.Write(id+ " Place "+ loc+" Metropolis " +population+"\n");
     }
 
