@@ -127,12 +127,16 @@ static void task2()
      a.Add(new Metropolis(s[0], n[0], n[2]));
      a.Add(new Metropolis(s[1], n[1], n[3]));
      
-    a.Sort(new Comp());
-    /*Region ar = new Region(s[0], n[0], s[2]);
-    ar.Show();*/
-    
-    // BaseAI p = new Pl(b);
-    //            b.start();
+   // var a = a.OrderBy(x => x.id).ThenBy(x => x.population).ToList();    
+
+    //a.sort((x,y)=>x.id.CompareTo(y.id));
+    List<Place> sortpl = a.OrderBy(x=>x.id).ToList();
+
+    Console.WriteLine("\nSort:");
+     foreach (Place ar in sortpl)
+     {
+        ar.Show();
+     }
 
 }
 }
@@ -208,7 +212,7 @@ public class Place {
     }
 
     public void Show() {
-        Console.Write("Place: "+ id+" "+ loc+"\n");
+        Console.Write(id+"Place: "+ loc+"\n");
     }
 }
 
@@ -261,95 +265,9 @@ class Metropolis : Place {
     }
 
     public void Show() {
-        Console.Write(id+ " Place "+ loc+"Metropolis " +population+"\n");
+        Console.Write(id+ " Place "+ loc+" Metropolis " +population+"\n");
     }
 
 }
-
-
-public class Comp: Comparer<Place>{
-
-  Comparer<Place> com = new Comparer<Place>(){
-    public override int Compare(Place i,Place j)
-    {
-    if (i.id > j.id) {
-                            return 1;
-                        } else if (i.id < j.id) {
-                            return -1;
-                        } else
-                            return 0;
-      }
-};
-
-  Comparer<Place> com1 = new Comparer<Place>() {
-                    public int Compare(Place i, Place j) {
-                        if (i.loc == j.loc) {
-                            return 0;
-                        } else
-                            return 1;
-
-                    }
-                };
-}
-
-
-/*
-abstract class BaseAI {
-
-    public List<Place> p;
-
-    public BaseAI(List<Place> p) {
-        this.p = p;
-    }
-
-    public void run() {
-
-    }
-}
-
-class Pl : BaseAI {
-
-    public Pl(List<Place> p) : base(p){
-    }
-
-    public void run() {
-
-        for (Place p) {
-
-                Comparator<Place> com = new Comparator<Place>() {
-                    public int compare(Place i, Place j) {
-                        if (i.name == j.name) {
-                            return 0;
-                        } else
-                            return 1;
-
-                    }
-                };
-
-                Comparator<Place> com1 = new Comparator<Place>() {
-                    public int compare(Place i, Place j) {
-                        if (i.id > j.id) {
-                            return 1;
-                        } else if (i.id < j.id) {
-                            return -1;
-                        } else
-                            return 0;
-                    
-                };
-
-                p.sort(com);
-
-                Console.Write("\nR: ");
-                p.Show();
-
-                p.sort(com1);
-
-                Console.Write("\nR: ");
-                p.Show();
-
-                }
-        }
-        }}
-*/
 
 }
